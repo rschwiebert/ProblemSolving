@@ -2,6 +2,8 @@
 # https://projecteuler.net/problem=7
 
 # What is the 10 001st prime number?
+
+# Notes:
 # I would have liked to use a sieve, but it seems bad to have to specify
 # how long the array containing the sieve is. In this method, no choice is made.
 
