@@ -3,8 +3,9 @@
 
 
 def findPrimeFactor(n):
-    # Find and return a prime factor for the natural number n
+    """Find and return the lowest prime factor of n"""
     i = 2
+
     while i <= (n**0.5) + 1:
         if n % i == 0:
             return i
@@ -12,12 +13,14 @@ def findPrimeFactor(n):
             i += 1
     return n
 
-input = 600851475143
+number = 600851475143
+
+# The answer will be the last prime factor found in this sequence
 while True:
-    factor = findPrimeFactor(input)
-    if input == factor:
+    factor = findPrimeFactor(number)
+    if number == factor:
         break
     else:
-        input /= factor
+        number /= factor
 
 print("The answer is: %d " % factor)

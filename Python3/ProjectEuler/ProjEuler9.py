@@ -50,7 +50,7 @@ def checkMultiples(v):
     i = 1
     temp = v
     while sum(temp) < 1000:
-        temp = tuple(map(lambda x: x*i,v ))
+        temp = tuple([x*i for x in v])
         i += 1
     if sum(temp) == 1000:
         return temp

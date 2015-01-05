@@ -4,14 +4,14 @@
 # Find the LCM of 1-20 
 
 def euclidAlg(a,b):
-    '''Implement the Euclidean algorithm to find GCDs'''
+    """Implement the Euclidean algorithm to find GCDs"""
     a,b = [max(a,b),min(a,b)]
     while a%b != 0:
         a, b = [b, a%b]
     return b
 
 def myLCM(a,b):
-    '''Find the LCM via the formula LCM(x,y)=x*y/gcd(x,y)'''
+    """Find the LCM via the formula LCM(x,y)=x*y/gcd(x,y)"""
     return a*b/euclidAlg(a,b)
 
 answer = 2

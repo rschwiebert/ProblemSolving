@@ -7,14 +7,10 @@
 isPal = lambda s: s == s[::-1]
 
 maxNum = 1
-for i in range(100,1000):
-    for j in range(i,1000):
+for i in range(100, 1000):
+    for j in range(i, 1000):
         s = str(i*j)
         if int(s) > maxNum and isPal(s):
             maxNum = int(s)
 
-print "The answer is: %d "%maxNum
-
-
-
-
+print "The answer is: %d " % maxNum
