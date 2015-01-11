@@ -24,11 +24,11 @@ def solve():
             j += 1
         if (i-1) % 2 == 0 and (sieve[(i-1)//2]*sieve[i]) > 500:
             y = i*(i+1)/2
-            print "The answer is %d, which is %d in the triangular number sequence." % (y, i-1)
+            print("The answer is %d, which is %d in the triangular number sequence." % (y, i-1))
             return None
         elif (i-1) % 2 == 1 and (sieve[i-1]*sieve[i//2]) > 500:
             y = i*(i-1)/2
-            print "The answer is %d, which is %d in the triangular number sequence." % (y, i-1)
+            print("The answer is %d, which is %d in the triangular number sequence." % (y, i-1))
             return None
 
 if __name__ == "__main__":
