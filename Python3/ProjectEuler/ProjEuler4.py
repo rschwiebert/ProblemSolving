@@ -6,11 +6,13 @@
 
 isPal = lambda s: s == s[::-1]
 
-maxNum = 1
-for i in range(100, 1000):
-    for j in range(i, 1000):
-        s = str(i*j)
-        if int(s) > maxNum and isPal(s):
-            maxNum = int(s)
 
-print("The answer is: %d " % maxNum)
+if __name__ == '__main__':
+    maxNum = 1
+    for i in range(100, 1000):  # do I really need to do all these?
+        for j in range(i, 1000):
+            k = i*j
+            if k > maxNum and isPal(str(k)):  # is it more efficient to reverse?
+                maxNum = k
+
+    print("The answer is: {}".format(maxNum))

@@ -7,10 +7,9 @@
 
 # This is an optimized version of the naive approach of just looking at 
 # every window of 13 consecutive characters.
-# I made it into an object that can take longer strings and window lengths.
-# It's quite fast for the test case, often taking just under a millisecond.
 
-text=('73167176531330624919225119674426574742355349194934'
+
+text = ('73167176531330624919225119674426574742355349194934'
 '96983520312774506326239578318016984801869478851843'
 '85861560789112949495459501737958331952853208805511'
 '12540698747158523863050715693290963295227443043557'
@@ -31,39 +30,32 @@ text=('73167176531330624919225119674426574742355349194934'
 '05886116467109405077541002256983155200055935729725'
 '716362695618826704282524836008232575304207529634507316717')
 
-class Solution:
-    def __init__(self, string, length):
-        self.s = string
-        self.L = length
-
-    def windowProd(self,index):
-        '''Needed to compute the product of the next L numbers, when it is nonzero'''
-        P = 1
-        for j in range(index,index+self.L):
-            P *= int(self.s[j])
-        return P
-
-    def maxProd(self):
-        i = 0
-        M = 0
-        prod = 0
-        MAX = 9**self.L
-        while i + 13 < len(self.s):
-            if '0' in self.s[i:i+self.L]:
-                while '0' in self.s[i:i+self.L]: #this while loop advances through trivial cases when 0 kills everything
-                    i += 1
-            elif self.s[i-1] == '0':
-                prod = self.windowProd(i)
-                i += 1
-            else:
-                prod /= int(self.s[i-1])
-                prod *= int(self.s[i+self.L-1])
-                i += 1
-            if prod > M: M = prod
-            if prod == MAX: break   #if this is reached, there is no point in continuing
-        print("The answer is: %d" % M)
 
 if __name__ == "__main__":
-    sol = Solution(text,13)
-    sol.maxProd()
+    cur = 0
+    maximum = 0
+    while cur + 12 < 1000:
+        # if the window has a 0, advance beyond it and try again
+        if '0' in text[cur:cur+13]:
+            cur += text[cur:cur+13].rindex('0') + 1
+            continue
+        # OK, it's worth computing the window's product
+        val = 1
+        for num in map(int, text[cur:cur+13]):
+            val *= num
+        maximum = max(val, maximum)
+        # do right shifts until you hit a 0 or the end
+        while cur + 13 < 1000:
+            if text[cur+13] == '0':
+                # we know how far we need to jump here
+                cur += 13
+                break
+            val /= int(text[cur])
+            val *= int(text[cur+13])
+            maximum = max(val, maximum)
+            cur += 1
+    print('The answer is: {}'.format(maximum))
+
+
+
 

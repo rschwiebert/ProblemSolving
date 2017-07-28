@@ -1,12 +1,15 @@
 #!/usr/bin/python
 # https://projecteuler.net/problem=2
 
-v = [1,2]
-total = 0
+from itertools import islice, takewhile
+from library import fibonacci
 
-while v[1] < 4*(10**6):
-    if v[1]%2 == 0:
-        total += v[1]
-    v = [v[1],v[0]+v[1]]
 
-print("The answer is: %d "%total)
+if __name__ == '__main__':
+    my_iterator = takewhile(lambda x: x < 4000000, fibonacci())
+    # a quick pattern analysis indicates that every third Fibonacci number
+    # is even, starting at 2.
+    my_iterator = islice(my_iterator, 1, None, 3)
+    total = sum(my_iterator)
+    print('The answer is {}.'.format(total))
+

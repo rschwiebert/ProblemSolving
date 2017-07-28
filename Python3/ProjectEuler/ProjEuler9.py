@@ -9,6 +9,10 @@
 # Method1 has three nested loops, probably putting it into O(n^3) performance
 # Method2 is just searching a finite ternary tree, so it would have O(n) performance
 
+from collections import deque
+from library import FibBox
+
+
 # Naive (slow) method
 def method1():
     a,b,c=(0,0,0)
@@ -25,57 +29,22 @@ def method1():
                 else:
                     continue
 
-class FibBox:
-    '''Basic implementation of a Fibonacci box tree node'''
-    def __init__(self, v):
-        self.a = v[0]
-        self.b = v[1]
-        self.c = v[2]
-        self.d = v[3]
-        self.values=[self.a,self.b,self.c,self.d]
-        self.triple = ( 2*self.a*self.c,
-                        self.b*self.d,
-                        self.a*self.d+self.b*self.c)
-        self.children = []
-
-    def setChildren(self):
-        self.children = [FibBox((self.d-self.b,  self.b, self.d, 2*self.d-self.b)),
-                FibBox((self.b, self.d, self.b+self.d, 2*self.b+self.d)),
-                FibBox((self.d, self.b, self.b+self.d, 2*self.d+self.b)),
-            ]
-        
-def checkMultiples(v):
-    '''Generates all nonprimitive triples from a primitive one,
-        and returns the winner, if it exists.'''
-    i = 1
-    temp = v
-    while sum(temp) < 1000:
-        temp = tuple([x*i for x in v])
-        i += 1
-    if sum(temp) == 1000:
-        return temp
-    else:
-        return []
 
 # Fibonacci box method (much faster)
 def method2():
-    '''Using Fibonacci boxes to generate primitive and nonprimitive
-       Pythagorean triples, do a DFS of the tree to find our answer'''
-    stack = [FibBox((1,1,2,3))]
-    while stack != []:
-        cur = stack.pop(-1)
-        if sum(cur.triple) <= 1000:
-            temp = checkMultiples(cur.triple)
-            if temp:    #here is the check to see if the triple has been found
-                break
-            else:       #continuing the traversal of the primitive tree
-                cur.setChildren()
+    """Using Fibonacci boxes to generate primitive and nonprimitive
+       Pythagorean triples, do a DFS of the tree to find our answer"""
+    stack = deque([FibBox((1, 1, 2, 3))])
+    while stack:
+        cur = stack.pop()
+        if cur.total <= 1000:
+            if 1000 % cur.total == 0:  # here is the check to see if the triple has been found
+                factor = 1000 / cur.total
+                print('The answer is: {}'.format(cur.product * factor ** 3))
+                return
+            else:  # continuing the traversal of the primitive tree
+                cur.set_children()
                 stack.extend(cur.children)
-    if sum(temp) == 1000:
-        print("The triple is: ", temp)
-        print("The answer is abc=",temp[0]*temp[1]*temp[2])
-    else:
-        print("The triple wasn't found.")
 
 
 if __name__ == "__main__":
