@@ -8,3 +8,15 @@
 8 9
 9
 10 8 "Seems optimal, but seems slow."
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+
+60 5 "room for improvement"
