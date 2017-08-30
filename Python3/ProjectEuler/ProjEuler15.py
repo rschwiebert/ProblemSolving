@@ -1,9 +1,11 @@
 #!/usr/bin/python2.7
-# https://projecteuler.net/problem=12
+# https://projecteuler.net/problem=15
 __author__ = 'ryan'
 
 # How many paths are there through a 20x20 grid from top left to bottom right if you can move "right" or "down"
 # at each step?
+
+# Same thing as counting binary sequences with 20 0's and 20 1's.
 
 from itertools import product
 

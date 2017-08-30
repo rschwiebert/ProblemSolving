@@ -3,13 +3,8 @@
 # Longest Collatz cycle starting under 10**6
 
 
-def collatz(n):
-    """Implementation of Collatz function."""
-    if n % 2 == 0:
-        out = n/2
-    else:
-        out = 3*n+1
-    return out
+from library import collatz
+
 
 cache = {1: 1}
 maxn, maxcyc = (1, 1)
@@ -22,12 +17,12 @@ def compute_cycles(n):
         cache[n] = result
     return cache[n]
 
+if __name__ == '__main__':
+    # Go through candidates making use of the cache.
+    for i in range(2, 10**6):
+        answer = compute_cycles(i)
+        if answer > maxcyc:
+            maxcyc = answer
+            maxn = i
 
-# Go through candidates making use of the cache.
-for i in range(2, 10**6):
-    answer = compute_cycles(i)
-    if answer > maxcyc:
-        maxcyc = answer
-        maxn = i
-
-print("The answer is %d." % maxn)
+    print("The answer is: {}.".format(maxn))

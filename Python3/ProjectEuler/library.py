@@ -11,6 +11,26 @@ def fibonacci():
         i, j = j, i+j
 
 
+def triangular():
+    """
+    A generator for triangular numbers. The sequence starts 1, 3, 6,...
+    """
+    i = 0
+    n = 1
+    while True:
+        i += n
+        yield i
+        n += 1
+
+
+def collatz(n):
+    """Implementation of Collatz function."""
+    if n % 2 == 0:
+        return n / 2
+    else:
+        return 3 * n + 1
+
+
 def euclid_alg(a, b):
     """Implement the Euclidean algorithm to find GCDs"""
     a, b = [max(a, b), min(a, b)]
@@ -47,7 +67,7 @@ def primes_less_than(N):
     :param N: length of the sieve 
     :return: yield the next prime that we find
     """
-    sieve = array('L', [0] * N)
+    sieve = array('b', [0] * N)
     for i in range(2, N):
         if sieve[i] != 0:
             continue

@@ -6,17 +6,20 @@
 6 10
 7 9
 8 9
-9
+9 9 "already very fast!"
 10 8 "Seems optimal, but seems slow."
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
+11 ? "Needs reviewed"
+12 8 "very fast algorithm, but can be optimized with structures"
+13 7 "seems lame, can also probably be optimized"
+14 7 "seems a little slow"
+15 7 "check to see if there isn't an obvious way to count sequences having 20 0's and 20 1's. Already seems fast tho."
+16 5 "stupid problem, stupid algorithm. Should be something using number theory."
+17 7 "blech"
+18 8 "algorithm is probably optimal, could use some code optimization"
+19 8 "blech"
+20 7 "more number theory possible?"
+21
 
 60 5 "room for improvement"
+89 8 ""
+233 5 "Lots of room for improvement (did not even successfully complete?)"
