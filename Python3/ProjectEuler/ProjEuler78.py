@@ -6,8 +6,6 @@ __author__ = 'ryan'
 # let p(n) be the number of ways n identical coins can be partitioned into (nonempty) piles
 # find the least value of n for which p(n) is divisible by one million
 
-from itertools import takewhile
-
 
 def f(k):
     """
@@ -26,7 +24,9 @@ def g(k):
     """
     return int(k * (3 * k + 1) / 2)
 
+
 MODULUS = 10**6
+
 
 class Partitions(object):
     def __init__(self):
@@ -45,22 +45,11 @@ class Partitions(object):
                 a = self.part(n - f(i))
                 b = self.part(n - g(i))
                 if a == b == 0:
-                    break
-                c = (-1)**(i+1)*(a + b)
-                # print(a,b,c)
-                tmp += c
-            tmp = tmp % MODULUS
+                    break  # Without this short-circuit, it was taking forever
+                tmp += (-1)**(i+1)*(a + b)
+            tmp = tmp % MODULUS  # No sense in storing digits that don't matter
             self.cache[n] = tmp
             return tmp
-
-
-def part(n):
-    """
-    Number of partitions of n elements
-    :param n:
-    :return:
-    """
-    values = []
 
 
 if __name__ == '__main__':

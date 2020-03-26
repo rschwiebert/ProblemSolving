@@ -15,16 +15,16 @@ from library import FibBox
 
 # Naive (slow) method
 def method1():
-    a,b,c=(0,0,0)
-    squares=[i**2 for i in range(0,1001)] #c is in this range, so this covers all possible c^2
-    for a in range(1,1001):
-        for b in range(a,1001):
-            if a**2+b**2 in squares:
-                c=(a**2+b**2)**0.5
-                c=int(c)
-                if  a+b+c==1000:
-                    print("The triple is:", a,b,c)
-                    print("The answer is abc= ",a*b*c)
+    a, b, c = (0, 0, 0)
+    squares = [i ** 2 for i in range(0, 1001)]  # c is in this range, so this covers all possible c^2
+    for a in range(1, 1001):
+        for b in range(a, 1001):
+            if a ** 2 + b ** 2 in squares:
+                c = (a ** 2 + b ** 2) ** 0.5
+                c = int(c)
+                if a + b + c == 1000:
+                    print("The triple is:", a, b, c)
+                    print("The answer is abc= ", a * b * c)
                     break
                 else:
                     continue

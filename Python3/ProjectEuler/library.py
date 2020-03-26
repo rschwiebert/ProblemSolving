@@ -1,4 +1,5 @@
 from array import array
+from collections import deque
 
 
 def fibonacci():
@@ -8,7 +9,7 @@ def fibonacci():
     i, j = 1, 1
     while True:
         yield j
-        i, j = j, i+j
+        i, j = j, i + j
 
 
 def triangular():
@@ -72,7 +73,7 @@ def primes_less_than(N):
         if sieve[i] != 0:
             continue
         yield i
-        for j in range(2*i, N, i):
+        for j in range(2 * i, N, i):
             sieve[j] = 1
 
 
@@ -81,11 +82,12 @@ class FibBox:
     Basic implementation of a Fibonacci box tree node.
     This is useful for generating primitive pythagorean triples
     """
+
     def __init__(self, v):
         (self.a, self.b, self.c, self.d) = v
         self.triple = (
-            2 * self.a * self.c,
             self.b * self.d,
+            2 * self.a * self.c,
             self.a * self.d + self.b * self.c
         )
         self.total = sum(self.triple)
@@ -94,7 +96,25 @@ class FibBox:
 
     def set_children(self):
         self.children = (
-            FibBox((self.d - self.b,  self.b, self.d, 2 * self.d - self.b)),
+            FibBox((self.d - self.b, self.b, self.d, 2 * self.d - self.b)),
             FibBox((self.b, self.d, self.b + self.d, 2 * self.b + self.d)),
             FibBox((self.d, self.b, self.b + self.d, 2 * self.d + self.b)),
         )
+
+
+def pythag_triple_gen(limiting_function=None, max_=None):
+    """
+    Produce primitive pythagorean triples
+    :param limiting_function: function to apply to self.triple to compare with max
+    :param max: If an integer, limit the max of triples returned with this number.
+                If None, produce all triples.
+    """
+    stack = deque([FibBox((1, 1, 2, 3))])
+    while stack:
+        cur = stack.pop()
+        yield cur.triple
+        cur.set_children()
+        if limiting_function is not None:
+            stack.extend([ch for ch in cur.children if limiting_function(ch.triple) <= max_])
+        else:
+            stack.extend(cur.children)
